@@ -33,6 +33,7 @@ public class VuelingServer {
 			DateFormat df = DateFormat.getInstance();
 			flights.add(new Flight(0000, bilbao, madrid, df.parse("07/01/2019")));
 			flights.add(new Flight(0001, madrid, bilbao, df.parse("07/01/2019")));
+			flights.add(new Flight(0000, bilbao, madrid, df.parse("08/01/2019")));
 			
 		
 		
