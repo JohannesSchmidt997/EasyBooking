@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/EB_Lufthansa/EB_Lufthansa.iml" filepath="$PROJECT_DIR$/EB_Lufthansa/EB_Lufthansa.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EB_Vueling/EB_Vueling.iml" filepath="$PROJECT_DIR$/EB_Vueling/EB_Vueling.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EasyBooking_Client/EasyBooking_Client.iml" filepath="$PROJECT_DIR$/EasyBooking_Client/EasyBooking_Client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EasyBooking_Server/EasyBooking_Server.iml" filepath="$PROJECT_DIR$/EasyBooking_Server/EasyBooking_Server.iml" />
+    </modules>
+  </component>
+</project>
