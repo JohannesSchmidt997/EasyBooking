@@ -40,8 +40,8 @@
     <target name="export" depends="build" description="Export the project into a .jar file">
         <delete dir="${dist.dir}"/>
         <mkdir dir="${dist.dir}"/>
-        <jar destfile="${dist.dir}/${export.file}" basedir="${build.dir}" includes="**/LufthansaServer.class, **/IRemote.class">
-            <zipgroupfileset dir="${lib}" includes="**/*.jar"/>
+        <jar destfile="${dist.dir}/${export.file}" basedir="${build.dir}" includes="**/ILufthansaServer.class">
+            <!--<zipgroupfileset dir="${lib}" includes="**/*.jar"/>-->
         </jar>
     </target>
 

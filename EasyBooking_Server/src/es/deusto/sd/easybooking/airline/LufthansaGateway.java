@@ -9,16 +9,16 @@ import java.util.List;
 import es.deusto.sd.easybooking.dto.AirportDTO;
 import es.deusto.sd.easybooking.dto.FlightDTO;
 import es.deusto.sd.easybooking.dto.ServiceDTO;
-import es.deusto.sd.lufthansa.*;
+import es.deusto.sd.lufthansa.ILufthansaServer;
 
 public class LufthansaGateway implements AirlineService {
 
-	private LufthansaServer ls;
+	private ILufthansaServer ls;
 	
 	public LufthansaGateway(String ip, String port, String serviceName) {
 		String name = ip + ":" + port + "/" + serviceName;
 		try {
-			ls = (LufthansaServer) java.rmi.Naming.lookup(name);
+			ls = (ILufthansaServer) java.rmi.Naming.lookup(name);
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1,5 +1,5 @@
 package es.deusto.sd.lufthansa;
-import java.io.Serializable;
+
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -10,10 +10,9 @@ import java.util.Date;
 import java.util.List;
 
 import es.deusto.sd.easybooking.dto.AirportDTO;
-import es.deusto.sd.easybooking.dto.FlightAssembler;
 import es.deusto.sd.easybooking.dto.FlightDTO;
 
-public class LufthansaServer extends UnicastRemoteObject implements IRemote {
+public class LufthansaServer extends UnicastRemoteObject implements ILufthansaServer {
 
 	private ArrayList<Flight> flights;
 	
@@ -105,40 +104,6 @@ public class LufthansaServer extends UnicastRemoteObject implements IRemote {
 		}
 	}
 }
-
-//@Temp: Place holder classes this should be part of the .jar of EasyBooking_Server
-//class AirportDTO implements Serializable {
-//	private static final long serialVersionUID = 1L;
-//	String name;
-//}
-
-//class FlightAssembler {
-//	
-//	public FlightAssembler() {
-//		
-//	}
-//	
-//	public List<FlightDTO> assemble(List<Flight> in) {
-//		List<FlightDTO> result = new ArrayList<FlightDTO>();
-//		for (int i = 0; i < in.size(); i++) {
-//			result.add(new FlightDTO(in.get(i)));
-//		}
-//		return result;
-//	}
-//	
-//	public FlightDTO assemble(Flight f) {
-//		return new FlightDTO(f);
-//	}
-//	
-//}
-//
-//class FlightDTO implements Serializable {
-//	private static final long serialVersionUID = 1L;
-//
-//	public FlightDTO(Flight f) {
-//		
-//	}
-//}
 
 //@Temp: Place holder classes needed to build the data base of flights
 //@Todo: Move them to their own files OR ¿reuse the ones from EasyBooking_Server, as a .jar?
