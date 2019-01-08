@@ -63,8 +63,24 @@ public class LufthansaServer extends UnicastRemoteObject implements IRemote {
 
 	@Override
 	public FlightDTO getFlightData(int flightNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		Flight f = null;
+		for (int i = 0; i < flights.size(); i++) {
+			f = flights.get(i);
+			if (f.code == flightNumber) {
+				break;
+			}
+		}
+		
+		if (f != null) {
+			FlightAssembler fa = new FlightAssembler();
+			FlightDTO result = fa.assemble(f);
+			return result;
+		}
+		else {
+			System.out.println("No flights with that number");
+			return null;
+		}
+		
 	}
 	
 	public static void main(String[] args) {
@@ -100,6 +116,10 @@ class FlightAssembler {
 			result.add(new FlightDTO(in.get(i)));
 		}
 		return result;
+	}
+	
+	public FlightDTO assemble(Flight f) {
+		return new FlightDTO(f);
 	}
 	
 }
