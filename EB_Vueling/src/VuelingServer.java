@@ -8,6 +8,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class VuelingServer {
 	/*
@@ -67,19 +68,36 @@ public class VuelingServer {
 				}
 				
 				
-				// @Todo: Create the assemble an generate the FilghtDTO list and write it to the socket
-			    // These classes should be in the .jar
 				
-				// FlightAssembler fa = new FlightAssembler()
-				// List<FlightDTO> result_list = fa.assemble(matches);
-				// out.writeObject(result_list);
+				FlightAssembler fa = new FlightAssembler();
+				List<FlightDTO> result_list = fa.assemble(matches);
+				out.writeObject(result_list);
 				
 			}
 			else if (action.equals("confirm")) {
 				// @Todo
 			}
 			else if (action.equals("get")) {
-				// @Todo
+				int flightNumber = in.readInt();
+				
+				Flight f = null;
+				for (int i = 0; i < flights.size(); i++) {
+					f = flights.get(i);
+					if (f.code == flightNumber) {
+						break;
+					}
+				}
+				
+				if (f != null) {
+					FlightAssembler fa = new FlightAssembler();
+					FlightDTO result = fa.assemble(f);
+					out.writeObject(result);
+				}
+				else {
+					System.out.println("No flights with that number");
+					// @Todo: Notify the client that the flight number does not have a match
+				}
+				
 			}
 			else {
 				// Unknown action ignore message
@@ -119,16 +137,40 @@ public class VuelingServer {
 
 //@Temp: Place holder classes this should be part of the .jar of EasyBooking_Server
 class AirportDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	String name;
 }
 
-class FlightDTO implements Serializable {
+class FlightAssembler {
 	
+	public FlightAssembler() {
+		
+	}
+	
+	public List<FlightDTO> assemble(List<Flight> in) {
+		List<FlightDTO> result = new ArrayList<FlightDTO>();
+		for (int i = 0; i < in.size(); i++) {
+			result.add(new FlightDTO(in.get(i)));
+		}
+		return result;
+	}
+	
+	public FlightDTO assemble(Flight f) {
+		return new FlightDTO(f);
+	}
 	
 }
 
-// @Temp: Place holder classes needed to build the data base of flights
-// @Todo: Move them to their own files OR ¿reuse the ones from EasyBooking_Server, as a .jar?
+class FlightDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	public FlightDTO(Flight f) {
+		
+	}
+}
+
+//@Temp: Place holder classes needed to build the data base of flights
+//@Todo: Move them to their own files OR ¿reuse the ones from EasyBooking_Server, as a .jar?
 
 class Airport {
 	String name;
@@ -145,6 +187,8 @@ class Flight {
 	int code;
 	Airport origin, destination;
 	Date date;
+	int seatCount;
+	int availableSeats;
 	
 	public Flight(int code, Airport origin, Airport destination, Date date) {
 		this.code = code;
