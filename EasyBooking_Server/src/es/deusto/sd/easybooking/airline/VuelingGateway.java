@@ -86,7 +86,7 @@ public class VuelingGateway implements AirlineService {
 			// we read from the read from the socket is a valid object.
 			// We could make the VuelingServer return a boolean + the FlightDTO, if the boolean is true
 			// it will be followed by the DTO else there is no DTO and the flightNumber does not match any flight
-			// However, there might be the possiblity that we always pass a valid flightNumber, 
+			// However, there might be the possibility that we always pass a valid flightNumber, 
 			// it depends on how we write our program
 			
 			FlightDTO f = (FlightDTO) in.readObject();
