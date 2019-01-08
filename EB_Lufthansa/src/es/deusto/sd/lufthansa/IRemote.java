@@ -1,3 +1,5 @@
+package es.deusto.sd.lufthansa;
+
 import java.rmi.Remote;
 import java.util.Date;
 import java.util.List;

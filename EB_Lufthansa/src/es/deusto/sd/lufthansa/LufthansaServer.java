@@ -1,3 +1,4 @@
+package es.deusto.sd.lufthansa;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.rmi.RemoteException;

@@ -6,10 +6,11 @@ import java.util.List;
 import es.deusto.sd.easybooking.dto.AirportDTO;
 import es.deusto.sd.easybooking.dto.FlightDTO;
 import es.deusto.sd.easybooking.dto.ServiceDTO;
+import es.deusto.sd.lufthansa.*;
 
 public class LufthansaGateway implements AirlineService {
 
-	LufthansaServer ls;
+	private LufthansaServer ls;
 	
 	public LufthansaGateway(String ip, String port, String serviceName) {
 		String name = ip + ":" + port + "/" + serviceName;
