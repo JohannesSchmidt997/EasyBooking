@@ -1,5 +1,8 @@
 package es.deusto.sd.easybooking.airline;
 
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.List;
 
@@ -14,12 +17,18 @@ public class LufthansaGateway implements AirlineService {
 	
 	public LufthansaGateway(String ip, String port, String serviceName) {
 		String name = ip + ":" + port + "/" + serviceName;
-		ls = (LufthansaServer) java.rmi.Naming.lookup(name);
+		try {
+			ls = (LufthansaServer) java.rmi.Naming.lookup(name);
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
 	public List<FlightDTO> searchFlight(AirportDTO origin, AirportDTO destination, Date departure) {
-		return ls.searchFlight(origin, destination, departure);
+		// return ls.searchFlight(origin, destination, departure);
+		return null;
 	}
 
 	@Override
@@ -31,7 +40,8 @@ public class LufthansaGateway implements AirlineService {
 
 	@Override
 	public FlightDTO getFlightData(int flightNumber) {
-		return ls.getFlightData(flightNumber);
+		// return ls.getFlightData(flightNumber);
+		return null;
 	}
 	
 }

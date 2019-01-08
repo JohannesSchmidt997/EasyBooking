@@ -8,7 +8,8 @@
     <property name="lib.dir" location="lib"/>
     <property name="classpath" location="bin"/>
     <property name="export.file" value="EasyBooking_Server.jar"/>
-    <property name="rmireg.server.port" value="1099"/>
+	<property name="export.dto.file" value="EasyBookingDTO.jar"/>
+	<property name="rmireg.server.port" value="1099"/>
     <property name="rmireg.server.IP" value="127.0.0.1"/>
     <property name="server.Admin" value="admin"/>
     <property name="server.Receiver" value="receiver"/>
@@ -37,13 +38,22 @@
         <javac srcdir="${source.dir}" destdir="${build.dir}" classpathref="full.classpath" deprecation="true" fork="true" includeantruntime="no"></javac>
     </target>
 
-    <target name="export" depends="build" description="Export the project into a .jar file">
+    <target name="exportServerNotWorking!" depends="build" description="Export the project into a .jar file">
         <delete dir="${dist.dir}"/>
         <mkdir dir="${dist.dir}"/>
         <jar destfile="${dist.dir}/${export.file}" basedir="${build.dir}" includes="**/ITV**.class, **/**DTO.class">
             <zipgroupfileset dir="${lib}" includes="**/*.jar"/>
         </jar>
     </target>
+	
+	<target name="exportDTOs" depends="build" description="Export the project into a .jar file">
+        <delete dir="${dist.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+        <jar destfile="${dist.dir}/${export.dto.file}" basedir="${build.dir}" includes="**/**DTO.class">
+            <zipgroupfileset dir="${lib}" includes="**/*.jar"/>
+        </jar>
+    </target>
+
 
     <target name="server" depends="build" description="Runs Server program">
         <java classname="es.deusto.ingenieria.sd.sms.server.TVProgramManagerServer" classpathref="full.classpath" fork="true">

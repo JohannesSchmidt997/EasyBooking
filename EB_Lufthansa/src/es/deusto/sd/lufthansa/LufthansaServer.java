@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import es.deusto.sd.easybooking.dto.AirportDTO;
+import es.deusto.sd.easybooking.dto.FlightAssembler;
+import es.deusto.sd.easybooking.dto.FlightDTO;
+
 public class LufthansaServer extends UnicastRemoteObject implements IRemote {
 
 	private ArrayList<Flight> flights;
@@ -46,12 +50,12 @@ public class LufthansaServer extends UnicastRemoteObject implements IRemote {
 	}
 
 	@Override
-	public List<FlightDTO> searchFlights(AirportDTO origin, Airport destination, Date date) {
+	public List<FlightDTO> searchFlights(AirportDTO origin, AirportDTO destination, Date date) {
 		ArrayList<Flight> matches = new ArrayList<Flight>();
 		
 		for (int i = 0; i < flights.size(); i++) {
 			Flight f = flights.get(i);
-			if (f.origin.name.equals(origin.name) && f.destination.name.equals(destination.name) && f.date.equals(date)) {
+			if (f.origin.name.equals(origin.fullName) && f.destination.name.equals(destination.fullName) && f.date.equals(date)) {
 				matches.add(f);
 			}
 		}
@@ -103,38 +107,38 @@ public class LufthansaServer extends UnicastRemoteObject implements IRemote {
 }
 
 //@Temp: Place holder classes this should be part of the .jar of EasyBooking_Server
-class AirportDTO implements Serializable {
-	private static final long serialVersionUID = 1L;
-	String name;
-}
+//class AirportDTO implements Serializable {
+//	private static final long serialVersionUID = 1L;
+//	String name;
+//}
 
-class FlightAssembler {
-	
-	public FlightAssembler() {
-		
-	}
-	
-	public List<FlightDTO> assemble(List<Flight> in) {
-		List<FlightDTO> result = new ArrayList<FlightDTO>();
-		for (int i = 0; i < in.size(); i++) {
-			result.add(new FlightDTO(in.get(i)));
-		}
-		return result;
-	}
-	
-	public FlightDTO assemble(Flight f) {
-		return new FlightDTO(f);
-	}
-	
-}
-
-class FlightDTO implements Serializable {
-	private static final long serialVersionUID = 1L;
-
-	public FlightDTO(Flight f) {
-		
-	}
-}
+//class FlightAssembler {
+//	
+//	public FlightAssembler() {
+//		
+//	}
+//	
+//	public List<FlightDTO> assemble(List<Flight> in) {
+//		List<FlightDTO> result = new ArrayList<FlightDTO>();
+//		for (int i = 0; i < in.size(); i++) {
+//			result.add(new FlightDTO(in.get(i)));
+//		}
+//		return result;
+//	}
+//	
+//	public FlightDTO assemble(Flight f) {
+//		return new FlightDTO(f);
+//	}
+//	
+//}
+//
+//class FlightDTO implements Serializable {
+//	private static final long serialVersionUID = 1L;
+//
+//	public FlightDTO(Flight f) {
+//		
+//	}
+//}
 
 //@Temp: Place holder classes needed to build the data base of flights
 //@Todo: Move them to their own files OR ¿reuse the ones from EasyBooking_Server, as a .jar?
