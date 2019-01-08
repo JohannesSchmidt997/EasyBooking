@@ -24,7 +24,7 @@ public class VuelingGateway implements AirlineService {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<FlightDTO> searchFlight(AirportDTO origin, AirportDTO destination, Date departure) {
+	public List<FlightDTO> searchFlights(AirportDTO origin, AirportDTO destination, Date departure) {
 		List<FlightDTO> result = null; // Will it be better if we initialize this to an empty list?
 		try {
 			Socket socket = new Socket(vuelingServerIp, vuelingServerPort);

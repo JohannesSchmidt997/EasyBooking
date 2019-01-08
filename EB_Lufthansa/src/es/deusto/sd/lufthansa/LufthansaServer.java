@@ -43,9 +43,9 @@ public class LufthansaServer extends UnicastRemoteObject implements ILufthansaSe
 	}
 
 	@Override
-	public void confirmReservation() {
+	public boolean confirmReservation() {
 		// TODO Auto-generated method stub
-		
+		return true;
 	}
 
 	@Override

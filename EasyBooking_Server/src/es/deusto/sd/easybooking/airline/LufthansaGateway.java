@@ -26,22 +26,19 @@ public class LufthansaGateway implements AirlineService {
 	}
 
 	@Override
-	public List<FlightDTO> searchFlight(AirportDTO origin, AirportDTO destination, Date departure) {
-		// return ls.searchFlight(origin, destination, departure);
-		return null;
+	public List<FlightDTO> searchFlights(AirportDTO origin, AirportDTO destination, Date departure) {
+		return ls.searchFlights(origin, destination, departure);
 	}
 
 	@Override
 	public boolean confirmReservation(ServiceDTO service, int seatCount, String[] passangers) {
 		// @Todo
-		return false;
-	// 	return ls.confirmReservation
+		return ls.confirmReservation();
 	}
 
 	@Override
 	public FlightDTO getFlightData(int flightNumber) {
-		// return ls.getFlightData(flightNumber);
-		return null;
+		return ls.getFlightData(flightNumber);
 	}
 	
 }

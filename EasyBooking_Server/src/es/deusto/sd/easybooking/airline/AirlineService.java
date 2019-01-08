@@ -7,10 +7,10 @@ import es.deusto.sd.easybooking.dto.AirportDTO;
 import es.deusto.sd.easybooking.dto.FlightDTO;
 import es.deusto.sd.easybooking.dto.ServiceDTO;
 
-// @Todo: Find a more appropriate name
+// @Todo: Find a more appropriate name AirlineGateway
 public interface AirlineService {
 	
-	public List<FlightDTO> searchFlight(AirportDTO origin, AirportDTO destination, Date departure);
+	public List<FlightDTO> searchFlights(AirportDTO origin, AirportDTO destination, Date departure);
 
 	// We may want to not pass the full serviceDTO just the flight number might be enough
 	public boolean confirmReservation(ServiceDTO service, int seatCount, String[] passangers);

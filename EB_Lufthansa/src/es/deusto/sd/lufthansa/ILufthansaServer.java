@@ -9,6 +9,6 @@ import es.deusto.sd.easybooking.dto.FlightDTO;
 
 public interface ILufthansaServer extends Remote {
  	public List<FlightDTO> searchFlights(AirportDTO origin, AirportDTO destination, Date date);
-	public void confirmReservation(); // @Todo
+	public boolean confirmReservation(); // @Todo
 	public FlightDTO getFlightData(int flightNumber);
 }
