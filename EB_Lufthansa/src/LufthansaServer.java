@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class LufthansaServer extends UnicastRemoteObject implements IRemote {
 
@@ -44,9 +45,20 @@ public class LufthansaServer extends UnicastRemoteObject implements IRemote {
 	}
 
 	@Override
-	public FlightDTO getFlights(AirportDTO origin, Airport destination, Date date) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<FlightDTO> searchFlights(AirportDTO origin, Airport destination, Date date) {
+		ArrayList<Flight> matches = new ArrayList<Flight>();
+		
+		for (int i = 0; i < flights.size(); i++) {
+			Flight f = flights.get(i);
+			if (f.origin.name.equals(origin.name) && f.destination.name.equals(destination.name) && f.date.equals(date)) {
+				matches.add(f);
+			}
+		}
+		
+		FlightAssembler fa = new FlightAssembler();
+		List<FlightDTO> result = fa.assemble(matches);
+		
+		return result;
 	}
 
 	@Override
@@ -54,16 +66,50 @@ public class LufthansaServer extends UnicastRemoteObject implements IRemote {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public static void main(String[] args) {
+		if (args.length == 3) {
+			try {
+				new LufthansaServer(args[0], args[1], args[2]);
+			} catch (RemoteException e) {
+				System.out.println("Lufthansa server constructor failed");
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("3 parameters are expected, you passed " + args.length);
+		}
+	}
 }
 
 //@Temp: Place holder classes this should be part of the .jar of EasyBooking_Server
 class AirportDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
 	String name;
 }
 
+class FlightAssembler {
+	
+	public FlightAssembler() {
+		
+	}
+	
+	public List<FlightDTO> assemble(List<Flight> in) {
+		List<FlightDTO> result = new ArrayList<FlightDTO>();
+		for (int i = 0; i < in.size(); i++) {
+			result.add(new FlightDTO(in.get(i)));
+		}
+		return result;
+	}
+	
+}
+
 class FlightDTO implements Serializable {
-	
-	
+	private static final long serialVersionUID = 1L;
+
+	public FlightDTO(Flight f) {
+		
+	}
 }
 
 //@Temp: Place holder classes needed to build the data base of flights
@@ -84,6 +130,8 @@ class Flight {
 	int code;
 	Airport origin, destination;
 	Date date;
+	int seatCount;
+	int availableSeats;
 	
 	public Flight(int code, Airport origin, Airport destination, Date date) {
 		this.code = code;
