@@ -2,5 +2,6 @@
 <project version="4">
   <component name="AntConfiguration">
     <buildFile url="file://$PROJECT_DIR$/EasyBooking_Server/build.xml" />
+    <buildFile url="file://$PROJECT_DIR$/EasyBooking_Client/build.xml" />
   </component>
 </project>

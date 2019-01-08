@@ -1,5 +1,7 @@
 package es.deusto.sd.easybooking.controller;
 
+import es.deusto.sd.easybooking.dto.AirportDTO;
+
 public class Controller {
 	
 
@@ -19,7 +21,7 @@ public class Controller {
 		
 	}
 	
-	public reservationDTO getReservations(User user) {
+	public ReservationDTO getReservations(User user) {
 		
 	}
 	
