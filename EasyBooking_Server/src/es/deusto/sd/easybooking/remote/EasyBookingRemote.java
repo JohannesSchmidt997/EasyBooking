@@ -7,8 +7,8 @@ import java.util.Date;
 import java.util.List;
 
 import es.deusto.sd.easybooking.airline.*;
-import es.deusto.sd.easybooking.dto.AirportDTO;
-import es.deusto.sd.easybooking.dto.ServiceDTO;
+import es.deusto.sd.easybooking.classes.Airport;
+import es.deusto.sd.easybooking.dto.*;
 
 public class EasyBookingRemote extends UnicastRemoteObject implements IEasyBookingRemote {
 
@@ -35,8 +35,10 @@ public class EasyBookingRemote extends UnicastRemoteObject implements IEasyBooki
 
 	@Override
 	public List<AirportDTO> getAirportList() throws RemoteException {
-		// TODO How do we do this?
-		return null;
+		List<Airport> airportList = Airport.airportList;
+		AirportAssembler assembler = new AirportAssembler();
+		
+		return assembler.assemble(airportList);
 	}
 
 	@Override
@@ -58,8 +60,8 @@ public class EasyBookingRemote extends UnicastRemoteObject implements IEasyBooki
 	}
 
 	@Override
-	public void makeReservation(ServiceDTO service, int passengers, String passengerNames) throws RemoteException {
-		// TODO Auto-generated method stub
+	public void makeReservation(ServiceDTO service, int passengers, String passengerNames, long userID) throws RemoteException {
+		// TODO Save to DB, payment reservation
 		
 	}
 

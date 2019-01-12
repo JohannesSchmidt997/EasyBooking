@@ -14,6 +14,6 @@ public interface IEasyBookingRemote extends Remote {
 	public List<AirportDTO> getAirportList() throws RemoteException;
 	public List<ServiceDTO> getServices(Date date, AirportDTO from, AirportDTO to) throws RemoteException;
 	// TODO: return type for payment
-	public void makeReservation(ServiceDTO service, int passengers, String passengerNames) throws RemoteException;
+	public void makeReservation(ServiceDTO service, int passengers, String passengerNames, long userID) throws RemoteException;
 	// TODO: more functions
 }

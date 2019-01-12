@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import es.deusto.sd.easybooking.dto.FlightDTO;
+import es.deusto.sd.easybooking.dto.ServiceDTO;
 
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -26,7 +26,7 @@ public class BookFlight extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BookFlight(FlightDTO flight) {
+	public BookFlight(ServiceDTO flight) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
