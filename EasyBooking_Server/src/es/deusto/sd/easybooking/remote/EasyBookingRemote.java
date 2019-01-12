@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import es.desuto.sd.easybooking.accounts.User;
 import es.deusto.sd.easybooking.airline.*;
 import es.deusto.sd.easybooking.classes.Airport;
 import es.deusto.sd.easybooking.dto.*;
@@ -16,6 +17,7 @@ public class EasyBookingRemote extends UnicastRemoteObject implements IEasyBooki
 	 * 
 	 */
 	private AirlineService gateways[];
+	private IGoogleServer google;
 	private static final long serialVersionUID = 1L;
 
 	public EasyBookingRemote() throws RemoteException {
@@ -28,9 +30,16 @@ public class EasyBookingRemote extends UnicastRemoteObject implements IEasyBooki
 	}
 
 	@Override
-	public long login(String user, String pass, String service) throws RemoteException {
-		// TODO Auto-generated method stub
-		return 0;
+	public long login(String email, String pass, String service) throws RemoteException {
+		// TODO get user with that email
+		User user;
+		if (false) // It doesn't exist
+			return -1;
+		long token = google.userExists(email, pass);
+		if (user.getToken() != token)
+			return -1;
+		else
+			return token;
 	}
 
 	@Override
@@ -54,15 +63,23 @@ public class EasyBookingRemote extends UnicastRemoteObject implements IEasyBooki
 	}
 
 	@Override
-	public boolean register(String user, String pass, String service) throws RemoteException {
+	public boolean register(String email, String pass, String name, String service) throws RemoteException {
 		// TODO Auto-generated method stub
-		return false;
+		long token = google.userExists(email, pass);
+		if (token == -1)
+			return false;
+		
+		else {
+			User newUser = new User(email, name, token);
+			// TODO save to DB
+			return true;
+		}
 	}
 
 	@Override
 	public void makeReservation(ServiceDTO service, int passengers, String passengerNames, long userID) throws RemoteException {
 		// TODO Save to DB, payment reservation
-		
+		// The user must be searched in the DB via userID
 	}
 
 }
