@@ -16,7 +16,7 @@ public class GoogleServer extends UnicastRemoteObject implements IGoogleServer {
 			
 			users = new ArrayList<User>();
 			
-			users.add(new User("a@gmail.com", "a"));
+			users.add(new User("a@gmail.com", "a", 12345L));
 			
 			
 		} catch (MalformedURLException e) {
@@ -27,14 +27,14 @@ public class GoogleServer extends UnicastRemoteObject implements IGoogleServer {
 	}
 
 	@Override
-	public boolean userExists(String email, String password) {
+	public long userExists(String email, String password) {
 		for (int i = 0; i < users.size(); i++) {
 			User u = users.get(i);
 			if (u.email.equals(email) && u.pass.equals(password)) {
-				return true;
+				return u.token;
 			}
 		}
-		return false;
+		return -1L;
 	}
 
 }
@@ -43,9 +43,11 @@ class User {
 	
 	String email;
 	String pass;
+	long token;
 	
-	User(String email, String pass) {
+	User(String email, String pass, long token) {
 		this.email = email;
 		this.pass = pass;
+		this.token = token;
 	}
 }
