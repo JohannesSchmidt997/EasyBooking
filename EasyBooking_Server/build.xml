@@ -38,12 +38,10 @@
         <javac srcdir="${source.dir}" destdir="${build.dir}" classpathref="full.classpath" deprecation="true" fork="true" includeantruntime="no"></javac>
     </target>
 
-    <target name="exportServerNotWorking!" depends="build" description="Export the project into a .jar file">
+    <target name="exportServer" depends="build" description="Export the project into a .jar file">
         <delete dir="${dist.dir}"/>
         <mkdir dir="${dist.dir}"/>
-        <jar destfile="${dist.dir}/${export.file}" basedir="${build.dir}" includes="**/ITV**.class, **/**DTO.class">
-            <zipgroupfileset dir="${lib}" includes="**/*.jar"/>
-        </jar>
+        <jar destfile="${dist.dir}/${export.file}" basedir="${build.dir}" includes="**/IEasyBookingRemote.class"/>
     </target>
 	
 	<target name="exportDTOs" depends="build" description="Export the project into a .jar file">
@@ -62,7 +60,6 @@
             <arg value="${rmireg.server.IP}"/>
             <arg value="${rmireg.server.port}"/>
             <arg value="${server.Admin}"/>
-            <arg value="${server.Receiver}"/>
         </java>
     </target>
 </project>
