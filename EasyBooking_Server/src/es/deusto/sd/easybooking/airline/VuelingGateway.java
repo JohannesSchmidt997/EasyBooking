@@ -38,6 +38,8 @@ public class VuelingGateway implements AirlineService {
 			out.writeObject(departure);
 			
 			result = (List<FlightDTO>) in.readObject(); // This should return a List<FlightDTO> object
+			
+			socket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -50,6 +52,7 @@ public class VuelingGateway implements AirlineService {
 
 	@Override
 	public boolean confirmReservation(ServiceDTO service, int seatCount, String[] passangers) {
+		boolean result = true;
 		try {
 			Socket socket = new Socket(vuelingServerIp, vuelingServerPort);
 			
@@ -60,13 +63,17 @@ public class VuelingGateway implements AirlineService {
 			
 			// @Todo
 			
+			
+			
+			socket.close();
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} // It will be more efficient to use a numeric constant here
 		
 		
-		return false;
+		return result;
 	}
 
 	@Override
@@ -89,12 +96,13 @@ public class VuelingGateway implements AirlineService {
 			// However, there might be the possibility that we always pass a valid flightNumber, 
 			// it depends on how we write our program
 			
-			FlightDTO f = (FlightDTO) in.readObject();
-			return f;
+			result = (FlightDTO) in.readObject();
+			socket.close();
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} // It will be more efficient to use a numeric constant here
+		} 
 		catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
