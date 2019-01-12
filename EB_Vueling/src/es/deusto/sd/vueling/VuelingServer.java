@@ -47,6 +47,13 @@ public class VuelingServer {
 	}
 	
 	public void handleRequest(Socket socket) {
+		/*
+		 * @Description: This is a very stupid protocol to implement different
+		 * types of requests. It always start with a string that
+		 * identifies the request the client wants to perform 
+		 * followed by the arguments needed for that operation
+		 */
+		
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 			ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
@@ -54,6 +61,7 @@ public class VuelingServer {
 			String action = in.readUTF();
 
 			if (action.equals("search")) {
+				// Read arguments
 				AirportDTO origin = (AirportDTO) in.readObject();
 				AirportDTO destination = (AirportDTO) in.readObject();
 				Date date = (Date) in.readObject();
@@ -69,7 +77,7 @@ public class VuelingServer {
 				}
 				
 				
-				
+				// Assemble and return list of FlightDTOs
 				FlightAssembler fa = new FlightAssembler();
 				List<FlightDTO> result_list = fa.assemble(matches);
 				out.writeObject(result_list);
@@ -77,10 +85,14 @@ public class VuelingServer {
 			}
 			else if (action.equals("confirm")) {
 				// @Todo
+				// Read arguments
+				
 			}
 			else if (action.equals("get")) {
+				// Read argument
 				int flightNumber = in.readInt();
 				
+				// Search flight
 				Flight f = null;
 				for (int i = 0; i < flights.size(); i++) {
 					f = flights.get(i);
@@ -90,6 +102,7 @@ public class VuelingServer {
 				}
 				
 				if (f != null) {
+					// Assemble and return the FlightDTO
 					FlightAssembler fa = new FlightAssembler();
 					FlightDTO result = fa.assemble(f);
 					out.writeObject(result);
@@ -101,11 +114,12 @@ public class VuelingServer {
 				
 			}
 			else {
-				// Unknown action ignore message
-				
+				// Unknown action, ignore message
+				System.out.println("Unknown request: " + action);
 			}
-			socket.close();
-		
+			
+			
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -123,10 +137,15 @@ public class VuelingServer {
 			ServerSocket serverSocket = new ServerSocket();
 			
 			while (true) {
-				// @Todo: Launch each request in a different thread
-				server.handleRequest(serverSocket.accept());
+				// @Todo: Launch each request in a different thread.
+				// accept() might create a thread? Investigate!
+				Socket socket = serverSocket.accept();
+				server.handleRequest(socket);
+				socket.close();
+				
 			}
-		
+			
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

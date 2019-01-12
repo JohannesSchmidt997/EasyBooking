@@ -3,7 +3,7 @@ package es.deusto.sd.easybooking.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import es.deusto.sd.easybooking.clases.Flight;
+import es.deusto.sd.easybooking.classes.Flight;
 
 public class FlightAssembler {
 	

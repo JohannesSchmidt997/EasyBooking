@@ -3,7 +3,7 @@ package es.deusto.sd.easybooking.dto;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import es.deusto.sd.easybooking.clases.Flight;
+import es.deusto.sd.easybooking.classes.Flight;
 
 public class FlightDTO {
 	public Date departureDate;
