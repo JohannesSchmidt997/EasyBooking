@@ -24,8 +24,8 @@ public class VuelingGateway implements AirlineService {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<FlightDTO> searchFlights(AirportDTO origin, AirportDTO destination, Date departure) {
-		List<FlightDTO> result = null; // Will it be better if we initialize this to an empty list?
+	public List<ServiceDTO> searchFlights(AirportDTO origin, AirportDTO destination, Date departure) {
+		List<ServiceDTO> result = null; // Will it be better if we initialize this to an empty list?
 		try {
 			Socket socket = new Socket(vuelingServerIp, vuelingServerPort);
 			
@@ -37,7 +37,7 @@ public class VuelingGateway implements AirlineService {
 			out.writeObject(destination);
 			out.writeObject(departure);
 			
-			result = (List<FlightDTO>) in.readObject(); // This should return a List<FlightDTO> object
+			result = (List<ServiceDTO>) in.readObject(); // This should return a List<FlightDTO> object
 			
 			socket.close();
 		} catch (IOException e) {
@@ -77,8 +77,8 @@ public class VuelingGateway implements AirlineService {
 	}
 
 	@Override
-	public FlightDTO getFlightData(int flightNumber) {
-		FlightDTO result = null;
+	public ServiceDTO getFlightData(int flightNumber) {
+		ServiceDTO result = null;
 		try {
 			Socket socket = new Socket(vuelingServerIp, vuelingServerPort);
 			
@@ -96,7 +96,7 @@ public class VuelingGateway implements AirlineService {
 			// However, there might be the possibility that we always pass a valid flightNumber, 
 			// it depends on how we write our program
 			
-			result = (FlightDTO) in.readObject();
+			result = (ServiceDTO) in.readObject();
 			socket.close();
 
 		} catch (IOException e) {

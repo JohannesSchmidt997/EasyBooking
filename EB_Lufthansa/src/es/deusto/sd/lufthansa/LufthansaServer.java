@@ -11,6 +11,7 @@ import java.util.List;
 
 import es.deusto.sd.easybooking.dto.AirportDTO;
 import es.deusto.sd.easybooking.dto.FlightDTO;
+import es.deusto.sd.easybooking.dto.ServiceDTO;
 
 public class LufthansaServer extends UnicastRemoteObject implements ILufthansaServer {
 
@@ -49,7 +50,7 @@ public class LufthansaServer extends UnicastRemoteObject implements ILufthansaSe
 	}
 
 	@Override
-	public List<FlightDTO> searchFlights(AirportDTO origin, AirportDTO destination, Date date) {
+	public List<ServiceDTO> searchFlights(AirportDTO origin, AirportDTO destination, Date date) {
 		ArrayList<Flight> matches = new ArrayList<Flight>();
 		
 		for (int i = 0; i < flights.size(); i++) {
@@ -60,13 +61,13 @@ public class LufthansaServer extends UnicastRemoteObject implements ILufthansaSe
 		}
 		
 		FlightAssembler fa = new FlightAssembler();
-		List<FlightDTO> result = fa.assemble(matches);
+		List<ServiceDTO> result = fa.assemble(matches);
 		
 		return result;
 	}
 
 	@Override
-	public FlightDTO getFlightData(int flightNumber) {
+	public ServiceDTO getFlightData(int flightNumber) {
 		Flight f = null;
 		for (int i = 0; i < flights.size(); i++) {
 			f = flights.get(i);
@@ -77,7 +78,7 @@ public class LufthansaServer extends UnicastRemoteObject implements ILufthansaSe
 		
 		if (f != null) {
 			FlightAssembler fa = new FlightAssembler();
-			FlightDTO result = fa.assemble(f);
+			ServiceDTO result = fa.assemble(f);
 			return result;
 		}
 		else {

@@ -6,9 +6,10 @@ import java.util.List;
 
 import es.deusto.sd.easybooking.dto.AirportDTO;
 import es.deusto.sd.easybooking.dto.FlightDTO;
+import es.deusto.sd.easybooking.dto.ServiceDTO;
 
 public interface ILufthansaServer extends Remote {
- 	public List<FlightDTO> searchFlights(AirportDTO origin, AirportDTO destination, Date date);
+ 	public List<ServiceDTO> searchFlights(AirportDTO origin, AirportDTO destination, Date date);
 	public boolean confirmReservation(); // @Todo
-	public FlightDTO getFlightData(int flightNumber);
+	public ServiceDTO getFlightData(int flightNumber);
 }

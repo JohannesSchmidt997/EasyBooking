@@ -10,6 +10,7 @@ import es.desuto.sd.easybooking.accounts.User;
 import es.deusto.sd.easybooking.airline.*;
 import es.deusto.sd.easybooking.classes.Airport;
 import es.deusto.sd.easybooking.dto.*;
+import es.deusto.sd.google.IGoogleServer;
 
 public class EasyBookingRemote extends UnicastRemoteObject implements IEasyBookingRemote {
 
