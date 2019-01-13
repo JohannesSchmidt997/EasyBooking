@@ -20,7 +20,12 @@ public class FlightAssembler {
 	}
 	
 	public FlightDTO assemble(Flight f) {
-		return new FlightDTO();
+		FlightDTO flight = new FlightDTO();
+		flight.airline = f.getAirline().getName();
+		AirportAssembler aira = new AirportAssembler();
+		flight.departureAirport = aira.assemble(f.getOrigin());
+		flight.arrivalAirport = aira.assemble(f.getDestination());
+		return flight;
 	}
 	
 }
