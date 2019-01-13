@@ -24,9 +24,10 @@ public class EasyBookingRemote extends UnicastRemoteObject implements IEasyBooki
 	public EasyBookingRemote() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
+		AirlineServiceFactory factory = new AirlineServiceFactory();
 		gateways = new AirlineService[2];
-		gateways[0] = new LufthansaGateway("127.0.0.1", "1234", "lufthansa");
-		gateways[1] = new VuelingGateway("127.0.0.1", 5678);
+		gateways[0] = factory.createService("lufthansa", new String[] {"127.0.0.1", "1234", "lufthansa"});//new LufthansaGateway("127.0.0.1", "1234", "lufthansa");
+		gateways[1] = factory.createService("vueling", new String[] {"127.0.0.1", "5678"});//new VuelingGateway("127.0.0.1", 5678);
 		
 	}
 
