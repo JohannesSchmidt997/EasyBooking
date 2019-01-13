@@ -22,9 +22,8 @@ public class FlightAssembler {
 	public FlightDTO assemble(Flight f) {
 		FlightDTO flight = new FlightDTO();
 		flight.airline = f.getAirline().getName();
-		AirportAssembler aira = new AirportAssembler();
-		flight.departureAirport = aira.assemble(f.getOrigin());
-		flight.arrivalAirport = aira.assemble(f.getDestination());
+		flight.departureAirportCode = f.getOrigin().getCode();
+		flight.arrivalAirportCode = f.getDestination().getCode();
 		return flight;
 	}
 	

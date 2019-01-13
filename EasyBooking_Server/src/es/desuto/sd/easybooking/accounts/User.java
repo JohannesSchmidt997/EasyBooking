@@ -1,9 +1,13 @@
 package es.desuto.sd.easybooking.accounts;
 
+import java.util.List;
+
 public class User {
 	private String email;
 	private String name;
 	private long token;
+	
+	private List<Reservation> reservations;
 	
 	public User(String email, String name, long token) {
 		super();
@@ -15,6 +19,7 @@ public class User {
 	public String getEmail() {
 		return email;
 	}
+
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -36,7 +41,12 @@ public class User {
 		this.token = token;
 	}
 	
+	public List<Reservation> getReservations() {
+		return reservations;
+	}
 	
-	
+	public void setReservations(List<Reservation> reservations) {
+		this.reservations = reservations;
+	}
 	
 }

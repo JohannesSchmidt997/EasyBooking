@@ -1,6 +1,8 @@
 package es.deusto.sd.easybooking.dto;
 
-public class AirportDTO {
+import java.io.Serializable;
+
+public class AirportDTO implements Serializable {
 	public String code;
 	public String fullName;
 	
