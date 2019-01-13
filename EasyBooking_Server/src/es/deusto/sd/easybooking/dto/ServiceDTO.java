@@ -20,6 +20,6 @@ public class ServiceDTO implements Serializable {
 	
 	@Override
 	public String toString() {
-		return flightNumber + " " + dateformat.format(departure) + " - " /* TODO + airline + " - " + departureAirport.code + " -> " + arrivalAirport.code*/;
+		return flight.flightCode + " " + dateformat.format(departure) + " - " + flight.airline + " - " + flight.departureAirport.code + " -> " + flight.arrivalAirport.code;
 	}
 }
