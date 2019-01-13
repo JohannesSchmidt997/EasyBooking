@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import es.deusto.sd.easybooking.dto.ServiceDTO;
+
 public class VuelingServer {
 	/*
 	 * 
@@ -84,8 +86,15 @@ public class VuelingServer {
 				
 			}
 			else if (action.equals("confirm")) {
-				// @Todo
 				// Read arguments
+				ServiceDTO service = (ServiceDTO) in.readObject();
+				int seatCount = in.readInt();
+				String[] passangers = (String[]) in.readObject();
+				
+				// @Todo: Check there are still seats and update
+				
+				// @Temp
+				out.writeBoolean(true);
 				
 			}
 			else if (action.equals("get")) {

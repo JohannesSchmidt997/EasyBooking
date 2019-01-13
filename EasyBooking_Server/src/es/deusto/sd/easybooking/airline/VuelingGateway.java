@@ -52,7 +52,7 @@ public class VuelingGateway implements AirlineService {
 
 	@Override
 	public boolean confirmReservation(ServiceDTO service, int seatCount, String[] passangers) {
-		boolean result = true;
+		boolean success = false;
 		try {
 			Socket socket = new Socket(vuelingServerIp, vuelingServerPort);
 			
@@ -60,9 +60,15 @@ public class VuelingGateway implements AirlineService {
 			ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 		
 			out.writeUTF("confirm");
+			out.writeObject(service);
+			out.writeInt(seatCount);
+			out.writeObject(passangers);
 			
-			// @Todo
-			
+			success = in.readBoolean();
+			if (!success) {
+				// @Todo: Handle error
+				
+			}
 			
 			
 			socket.close();
@@ -70,10 +76,10 @@ public class VuelingGateway implements AirlineService {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} // It will be more efficient to use a numeric constant here
+		} 
 		
 		
-		return result;
+		return success;
 	}
 
 	@Override
