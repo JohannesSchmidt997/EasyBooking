@@ -13,7 +13,13 @@ import es.deusto.sd.easybooking.ui.*;
 
 public class Controller {
 	
+	private static Controller instance;
+	
+	public static Controller getInstance() {
+		return instance;
+	}
 
+	
 	private RMIServiceLocator rmisl;
 	private long token = -1L;
 	private Login login;
@@ -23,7 +29,7 @@ public class Controller {
 	public Controller(String[] args) {
 		rmisl = new RMIServiceLocator();
 		rmisl.setService(args);
-		login = new Login(this);
+		login = new Login();
 	}
 	
 	public void search(AirportDTO orig, AirportDTO dest, String year, String month, String day) {
@@ -55,7 +61,7 @@ public class Controller {
 	}
 	
 	public void openRegisterWindow() {
-		register = new Register(this);
+		register = new Register();
 	}
 	
 	public boolean logIn(String email, String pass, String service) {
@@ -71,7 +77,7 @@ public class Controller {
 			return false;
 		} else {
 			login.dispose();
-			search = new Search(this);
+			search = new Search();
 			return true;
 		}
 	}
@@ -94,7 +100,7 @@ public class Controller {
 	}
 	
 	public static void main(String[] args) {
-		new Controller(args);
+		Controller.instance = new Controller(args);
 	}
 
 }

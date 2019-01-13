@@ -20,13 +20,11 @@ public class Login extends JFrame{
 	 * Create the application.
 	 */
 	
-	private Controller controller;
 	private JTextField textField;
 	private JPasswordField passwordField;
 
-	public Login(Controller controller) {
+	public Login() {
 		super();
-		this.controller = controller;
 		initialize();
 	}
 
@@ -74,7 +72,7 @@ public class Login extends JFrame{
 		panel_2.add(btnLoginWithFacebook);
 		
 		JButton btnLoginWithGoogle = new JButton("Login with Google");
-		btnLoginWithGoogle.addActionListener((e) -> controller.logIn(textField.getText(), String.copyValueOf(passwordField.getPassword()), "google"));
+		btnLoginWithGoogle.addActionListener((e) -> Controller.getInstance().logIn(textField.getText(), String.copyValueOf(passwordField.getPassword()), "google"));
 		panel_2.add(btnLoginWithGoogle);
 		
 		JPanel panel_3 = new JPanel();

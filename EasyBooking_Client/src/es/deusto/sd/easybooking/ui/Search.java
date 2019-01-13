@@ -15,6 +15,7 @@ import javax.swing.JTable;
 import java.awt.GridLayout;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -35,15 +36,12 @@ public class Search extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private DefaultListModel<ServiceDTO> listmodel;
-	private Controller controller;
 
 	/**
 	 * Create the frame.
 	 * @param controller 
 	 */
-	public Search(Controller controller) {
-		// TODO: populate list and comboboxes
-		this.controller = controller;
+	public Search() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -83,7 +81,7 @@ public class Search extends JFrame {
 		JComboBox<AirportDTO> comboBoxDestination = new JComboBox<AirportDTO>();
 		panel_4.add(comboBoxDestination);
 		
-		List<AirportDTO> airportList = controller.getAirportList();
+		List<AirportDTO> airportList = Controller.getInstance().getAirportList();
 		for (AirportDTO a : airportList) {
 			comboBoxDeparture.addItem(a);
 			comboBoxDestination.addItem(a);
@@ -121,7 +119,7 @@ public class Search extends JFrame {
 		panel.add(panel_7);
 		
 		JButton btnSearch = new JButton("Search");
-		btnSearch.addActionListener((e) -> controller.search((AirportDTO)comboBoxDeparture.getSelectedItem(), (AirportDTO)comboBoxDestination.getSelectedItem(), 
+		btnSearch.addActionListener((e) -> Controller.getInstance().search((AirportDTO)comboBoxDeparture.getSelectedItem(), (AirportDTO)comboBoxDestination.getSelectedItem(), 
 				textField_2.getText(), textField_1.getText(), textField.getText()));
 		panel_7.add(btnSearch);
 		

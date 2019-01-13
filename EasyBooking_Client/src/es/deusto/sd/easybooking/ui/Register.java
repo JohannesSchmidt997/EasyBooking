@@ -27,7 +27,6 @@ public class Register extends JFrame {
 	private JTextField textField;
 	private JComboBox<String> comboBox_auth;
 	private JComboBox<String> comboBox_payment;
-	private Controller controller;
 	private JPasswordField passwordField;
 	private JTextField textField_1;
 
@@ -38,8 +37,7 @@ public class Register extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Register(Controller controller) {
-		this.controller = controller;
+	public Register() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -117,7 +115,7 @@ public class Register extends JFrame {
 		panel.add(panel_4);
 		
 		JButton btnRegister = new JButton("Register");
-		btnRegister.addActionListener((e) -> this.controller.signUp(textField.getText(), String.copyValueOf(passwordField.getPassword()), textField_1.getText(), (String) comboBox_auth.getSelectedItem()));
+		btnRegister.addActionListener((e) -> Controller.getInstance().signUp(textField.getText(), String.copyValueOf(passwordField.getPassword()), textField_1.getText(), (String) comboBox_auth.getSelectedItem()));
 		panel_4.add(btnRegister);
 	}
 
