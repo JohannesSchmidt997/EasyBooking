@@ -7,6 +7,7 @@ public class Service {
 	private Date departureDate;
 	private float price;
 	private Flight flight;
+	private int totalSeats;
 	
 	public Date getDepartureDate() {
 		return departureDate;
@@ -25,6 +26,12 @@ public class Service {
 	}
 	public void setFlight(Flight flight) {
 		this.flight = flight;
+	}
+	public int getTotalSeats() {
+		return totalSeats;
+	}
+	public void setTotalSeats(int totalSeats) {
+		this.totalSeats = totalSeats;
 	}
 	
 	
