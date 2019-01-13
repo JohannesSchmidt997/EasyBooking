@@ -26,7 +26,7 @@ public class BookFlight extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BookFlight(ServiceDTO flight) {
+	public BookFlight(ServiceDTO service) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -38,9 +38,9 @@ public class BookFlight extends JFrame {
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		String info = "<html>Flight " + flight.flightCode + "<br>Departure airport: " + flight.departureAirport + "<br>Destination airport: "
-				+ flight.arrivalAirport + "<br>Airline: " + flight.airline + "<br>Date: " + flight.departureDate + "<br>Price: "
-				+ flight.price + "€";
+		String info = "<html>Flight " + service.flight.flightCode + "<br>Departure airport: " + service.flight.departureAirport + "<br>Destination airport: "
+				+ service.flight.arrivalAirport + "<br>Airline: " + service.flight.airline + "<br>Date: " + service.departure + "<br>Price: "
+				+ service.price + "€";
 		
 		JLabel lblFlightinfolabel = new JLabel(info);
 		panel.add(lblFlightinfolabel);

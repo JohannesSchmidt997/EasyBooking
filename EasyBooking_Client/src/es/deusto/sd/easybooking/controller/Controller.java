@@ -76,8 +76,8 @@ public class Controller {
 		}
 	}
 	
-	public List<ReservationDTO> getReservations() {
-		return null;
+	public void getReservations() {
+		;
 	}
 	
 	public List<AirportDTO> getAirportList() {
@@ -87,6 +87,10 @@ public class Controller {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	public void makeReservation() {
+		
 	}
 	
 	public static void main(String[] args) {
