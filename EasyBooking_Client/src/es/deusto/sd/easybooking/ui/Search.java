@@ -7,12 +7,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import es.deusto.sd.easybooking.dto.AirportDTO;
-import es.deusto.sd.easybooking.dto.FlightDTO;
+import es.deusto.sd.easybooking.controller.Controller;
+import es.deusto.sd.easybooking.dto.*;
 
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import java.awt.GridLayout;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -31,14 +34,16 @@ public class Search extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
-	private DefaultListModel<FlightDTO> listmodel;
+	private DefaultListModel<ServiceDTO> listmodel;
+	private Controller controller;
 
 	/**
 	 * Create the frame.
+	 * @param controller 
 	 */
-	public Search() {
+	public Search(Controller controller) {
 		// TODO: populate list and comboboxes
-		
+		this.controller = controller;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -65,6 +70,7 @@ public class Search extends JFrame {
 		JComboBox<AirportDTO> comboBoxDeparture = new JComboBox<AirportDTO>();
 		panel_2.add(comboBoxDeparture);
 		
+		
 		JPanel panel_3 = new JPanel();
 		panel.add(panel_3);
 		
@@ -76,6 +82,12 @@ public class Search extends JFrame {
 		
 		JComboBox<AirportDTO> comboBoxDestination = new JComboBox<AirportDTO>();
 		panel_4.add(comboBoxDestination);
+		
+		List<AirportDTO> airportList = controller.getAirportList();
+		for (AirportDTO a : airportList) {
+			comboBoxDeparture.addItem(a);
+			comboBoxDestination.addItem(a);
+		}
 		
 		JPanel panel_5 = new JPanel();
 		panel.add(panel_5);
@@ -109,6 +121,8 @@ public class Search extends JFrame {
 		panel.add(panel_7);
 		
 		JButton btnSearch = new JButton("Search");
+		btnSearch.addActionListener((e) -> controller.search((AirportDTO)comboBoxDeparture.getSelectedItem(), (AirportDTO)comboBoxDestination.getSelectedItem(), 
+				textField_2.getText(), textField_1.getText(), textField.getText()));
 		panel_7.add(btnSearch);
 		
 		JPanel panel_8 = new JPanel();
@@ -119,8 +133,12 @@ public class Search extends JFrame {
 		panel_8.add(btnMakeReservation, BorderLayout.SOUTH);
 		
 		listmodel = new DefaultListModel<>();
-		JList<FlightDTO> list = new JList<FlightDTO>(listmodel);
+		JList<ServiceDTO> list = new JList<ServiceDTO>(listmodel);
 		panel_8.add(list, BorderLayout.CENTER);
+	}
+
+	public DefaultListModel<ServiceDTO> getListmodel() {
+		return listmodel;
 	}
 
 }
