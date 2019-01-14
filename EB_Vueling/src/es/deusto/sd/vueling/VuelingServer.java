@@ -11,7 +11,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import es.deusto.sd.easybooking.dto.AirportDTO;
+import es.deusto.sd.easybooking.dto.FlightDTO;
 import es.deusto.sd.easybooking.dto.ServiceDTO;
+
+//
+// @Todo: Rename Flight to Service!!
+// 
+
+
 
 public class VuelingServer {
 	/*
@@ -73,7 +81,7 @@ public class VuelingServer {
 				
 				for (int i = 0; i < flights.size(); i++) {
 					Flight f = flights.get(i);
-					if (f.origin.name.equals(origin.name) && f.destination.name.equals(destination.name) && f.date.equals(date)) {
+					if (f.origin.name.equals(origin.fullName) && f.destination.name.equals(destination.fullName) && f.date.equals(date)) {
 						matches.add(f);
 					}
 				}
@@ -81,7 +89,7 @@ public class VuelingServer {
 				
 				// Assemble and return list of FlightDTOs
 				FlightAssembler fa = new FlightAssembler();
-				List<FlightDTO> result_list = fa.assemble(matches);
+				List<ServiceDTO> result_list = fa.assemble(matches);
 				out.writeObject(result_list);
 				
 			}
@@ -113,7 +121,7 @@ public class VuelingServer {
 				if (f != null) {
 					// Assemble and return the FlightDTO
 					FlightAssembler fa = new FlightAssembler();
-					FlightDTO result = fa.assemble(f);
+					ServiceDTO result = fa.assemble(f);
 					out.writeObject(result);
 				}
 				else {
@@ -164,11 +172,6 @@ public class VuelingServer {
 	
 }
 
-//@Temp: Place holder classes this should be part of the .jar of EasyBooking_Server
-class AirportDTO implements Serializable {
-	private static final long serialVersionUID = 1L;
-	String name;
-}
 
 class FlightAssembler {
 	
@@ -176,26 +179,22 @@ class FlightAssembler {
 		
 	}
 	
-	public List<FlightDTO> assemble(List<Flight> in) {
-		List<FlightDTO> result = new ArrayList<FlightDTO>();
+	public List<ServiceDTO> assemble(List<Flight> in) {
+		List<ServiceDTO> result = new ArrayList<ServiceDTO>();
 		for (int i = 0; i < in.size(); i++) {
-			result.add(new FlightDTO(in.get(i)));
+			Flight f = in.get(i);
+			result.add(assemble(f));
 		}
 		return result;
 	}
 	
-	public FlightDTO assemble(Flight f) {
-		return new FlightDTO(f);
+	public ServiceDTO assemble(Flight f) {
+		ServiceDTO result = new ServiceDTO();
+		result.departure = f.date;
+		result.flightNumber = f.code;
+		return result;
 	}
 	
-}
-
-class FlightDTO implements Serializable {
-	private static final long serialVersionUID = 1L;
-
-	public FlightDTO(Flight f) {
-		
-	}
 }
 
 //@Temp: Place holder classes needed to build the data base of flights
